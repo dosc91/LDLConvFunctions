@@ -24,7 +24,7 @@ This is a full list of all functions currently contained in `LDLConvFunctions`:
 
 - ALC - Average Lexical Correlation
 - ALDC - Average Levenshtein Distance of Candidates
-- DCC - Dual Route Consistency
+- DRC - Dual Route Consistency
 - EDNN - Euclidian Distance from Nearest Neighbour
 - NNC - Nearest Neighbour Correlation
 - SCPP - Semantic Correlation of Predicted Production
