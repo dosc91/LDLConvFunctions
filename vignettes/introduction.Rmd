@@ -321,7 +321,7 @@ datatable(NNCframe)
 
 The **S**emantic **C**orrelation of **P**redicted **P**roduction describes the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms.
 
-Higher **NNC** values indicate that the semantics of the estimated form better approximate the estimated meaning.
+Higher **SCPP** values indicate that the semantics of the estimated form better approximate the estimated meaning.
 
 To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
 
