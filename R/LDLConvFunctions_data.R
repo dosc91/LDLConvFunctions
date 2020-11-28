@@ -2,16 +2,16 @@
 #'
 #' Small data set containing English real words as well as pseudowords (from Schmitz et al., 2020). Columns contain information on wordforms, bases, affixes, and transcription.
 #'
-#' @docType data
-#'
-#' @usage data(LDLConvFunctions_data)
-#'
-#' @format An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
-#'
+#' @format A data frame with 100 rows and 4 variables:
+#' \describe{
+#'   \item{Word}{Words - real and nonce words}
+#'   \item{DISC}{Transcription of Word}
+#'   \item{Affix}{Affix of the word, if applicable}
+#'   \item{Base}{Base of the word}
+#'}
 #' @keywords datasets
 #'
 #' @author D. Schmitz
 #'
-#' @references Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
-#' @references Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
+#' @references Schmitz, D., Baer-Henney, D., & Plag, I. (submitted). The duration of word-final /s/ differs across morphological categories in English: Evidence from pseudowords.
 "LDLConvFunctions_data"
