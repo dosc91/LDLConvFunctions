@@ -14,6 +14,9 @@
 #' @references Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
 #' @references  Levenshtein, V. I. (1966). Binary codes capable of correcting deletions, insertions, and reversals. Soviet Physics Doklady. 10 (8), 707-710.
 #' @references van der Loo M (2014). The stringdist package for approximate string matching. The R Journal, 6, 111-122.
+
+#' @export
+
 ALDC <- function (prod_acc, data) {
   if (is.null(prod_acc)) {
     stop(call=F, geterrmessage = "prod_acc not found\n")

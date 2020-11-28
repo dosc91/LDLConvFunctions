@@ -18,6 +18,9 @@
 #' @author D. Schmitz
 #' @references Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
 #' @references Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
+
+#' @export
+
 NNC <- function (pseudo_S_matrix, real_S_matrix, pseudo_word_data, real_word_data)
 {
   if (is.null(pseudo_S_matrix)) {
