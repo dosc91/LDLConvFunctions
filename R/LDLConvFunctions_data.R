@@ -1,17 +1,17 @@
-#' Average Lexical Correlation - ALC
+#' LDLConvFunction - Data Set
 #'
-#' @description \code{ALC} computes the mean correlation of a pseudoword's estimated semantic vector with each of the words' semantic vectors.
-#' @param pseudo_S_matrix A data frame, typically computed by solving \code{(pseudo_S_matrix = pseudo_Cue_matrix * Hp)}, with \code{Hp}
-#' being the transformation matrix for mapping real word cues onto real word semantics (as done to obtain \code{real_S_matrix}).
-#' @param real_S_matrix A data frame, typically the output of \code{WpmWithLdl::make_S_matrix}.
-#' @param pseudo_word_data The dataset with which \code{pseudo_S_matrix} was computed.
-#' @return A data frame containing:
-#' \itemize{
-#'   \item \code{ALC} - The ALC value of a word.
-#'   \item \code{Pseudoword} - The pertinent pseudoword as found in \code{pseudo_word_data}.
-#'   \item \code{Base} - The pertinent base as found in \code{pseudo_word_data}.
-#' }
+#' Small data set containing English real words as well as pseudowords (from Schmitz et al., 2020). Columns contain information on wordforms, bases, affixes, and transcription.
+#'
+#' @docType data
+#'
+#' @usage data(grav)
+#'
+#' @format An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
+#'
+#' @keywords datasets
+#'
 #' @author D. Schmitz
+#'
 #' @references Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
 #' @references Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
 
