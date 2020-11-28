@@ -1,0 +1,340 @@
+---
+title: "LDLConvFunctions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{LDLConvFunctions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=F}
+library(LDLConvFunctions)
+library(DT)
+library(WpmWithLdl)
+```
+
+`LDLConvFunctions` offers functions to conveniently compute and extract several measures from `WpmWithLdl` objects.
+
+This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
+
+All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise.
+
+---
+
+# Installation
+
+The prefered way to install this package is through devtools:
+
+```{r include=T, eval=F}
+devtools::install_github("dosc91/LDLConvFunctions", upgrade_dependencies = FALSE)
+```
+
+The ALDC function requires the `stringdist` package to function. Thus, the `stringdist` package is automatically installed unless it is installed already.
+
+In case this automatic installation does not work for whatever reason, please install it manually:
+
+```{r include=T, eval=F}
+install.packages("stringdist")
+```
+
+--- 
+
+# Overview
+
+This is a full list of all functions contained in `LDLConvFunctions`:
+
+- ALC - [Average Lexical Correlation](#ALC)
+- ALDC - [Average Levenshtein Distance of Candidates](#ALDC)
+- DRC - [Dual Route Consistency](#DRC)
+- EDNN - [Euclidian Distance from Nearest Neighbour](#EDNN)
+- NNC - [Nearest Neighbour Correlation](#NNC)
+- SCPP - [Semantic Correlation of Predicted Production](#SCPP)
+
+Additionally, the package provides a small sample data set:
+
+- LDLConvFunctions_data.RData
+
+This data set will be used to illustrate the use of functions throughout this vignette.
+
+---
+
+# Data
+
+The LDLConvFunctions_data.rda file which is part of this package contains a data frame with 100 rows and 4 variables.
+
+```{r include=T, eval=T}
+# load data
+data(LDLConvFunctions_data)
+```
+
+```{r echo=FALSE}
+datatable(data)
+```
+
+The complete data set contains real words as well as pseudowords. To obtain the specific data sets for real words and pseudowords, follow this procedure:
+
+```{r include=T, eval=T}
+# real word data set
+real.data <- data[1:88,]
+
+# pseudoword data set
+pseudo.data <- data[89:100,]
+```
+
+The real word data set contains 88 rows, the pseudoword data set contains 12 rows.
+
+---
+
+# Functions
+
+## ALC - Average Lexical Correlation {#ALC}
+
+The **A**verage **L**exical **C**orrelation variable describes the mean correlation of a pseudoword's estimated semantic vector (as contained in $\hat{S}$) with each of the words' semantic vectors (as contained in $S$).
+
+Higher **ALC** values indicate that a pseudoword vector is part of a denser semantic neighbourhood.
+
+To use this function, you must create a real word S matrix as well as a pseudoword S matrix beforehand. Additionally, the data set to create the pseudoword S matrix is needed.
+
+```{r include=F, eval=T}
+real.cues = make_cue_matrix(data = real.data, formula = ~ Word + Affix, grams = 3, wordform = "DISC")
+
+pseudo.cues = make_cue_matrix(data = pseudo.data, formula = ~ Word + Affix, grams = 3, wordform = "DISC")
+
+combined.cues = make_cue_matrix(data = data, formula = ~ Word + Affix, grams = 3, wordform = "DISC")
+
+real.Smat = make_S_matrix(data = real.data, formula = ~ Word + Affix, grams = 3, wordform = "DISC")
+
+# pseudo.Smat can be obtained by using the result of learn_comprehension for real words
+
+# learn comprehension for real words
+real.comp = learn_comprehension(cue_obj = real.cues, S = real.Smat)
+
+## extract Hp
+Hp = real.comp$F
+
+## dimensions of Hp
+dim(Hp)
+# 461 461
+
+## dimensions of pseudoword C matrix
+dim(pseudo.cues$matrices$C)
+# 12 31
+
+## create an empty matrix, i.e. cells contain zeros, with rows=48 and columns=336-63
+add.rows <- matrix(0, 12, 430)
+dim(add.rows)
+# 12 430
+
+pseudo.C.bigger <- cbind(pseudo.cues$matrices$C, add.rows)
+dim(pseudo.C.bigger)
+# 12 461
+
+## make sure the new C matrix is considered a matrix
+pseudo.C.bigger <- as.matrix(pseudo.C.bigger)
+
+## using Hp and the bigger pseudoword C matrix, create the pseudoword S matrix
+pseudo.Smat = pseudo.C.bigger %*% Hp
+dim(pseudo.Smat)
+# 12 461
+
+## make sure the new S matrix is considered a matrix
+pseudo.Smat <- as.matrix(pseudo.Smat)
+
+
+#### combined S matrix ----
+
+combined.Smat <- rbind(real.Smat, pseudo.Smat)
+```
+
+```{r include=T, eval=T}
+# pseudo.Smat = S matrix for pseudowords
+# real.Smat = S matrix for real words
+
+ALCframe <- ALC(pseudo_S_matrix = pseudo.Smat, real_S_matrix = real.Smat, pseudo_word_data = pseudo.data)
+```
+
+```{r echo=FALSE}
+datatable(ALCframe)
+```
+
+---
+
+## ALDC - Average Levenshtein Distance of Candidates {#ALDC}
+
+The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits required to change one word into the other. The Levenshtein distance is measured using the `stringdist` function of the [`stringdist`](https://cran.r-project.org/web/packages/stringdist/index.html) package.
+
+The **A**verage **L**evenshtein **D**istance of **C**andidates describes the mean Levenshtein Distance of all candidate productions of a word.
+
+Higher **ALDC** values indicate that the candidate forms are very different from the intended pronunciation, indicating a sparse form neighborhood.
+
+To use this function, you must `learn_production` and evaluate its accuracy by `accuracy_production` beforehand. Additionally, the data set to compute the production accuracy is needed.
+
+```{r include=F, eval=T}
+# getting the mapping for comprehension
+combined.comp = learn_comprehension(cue_obj = combined.cues, S = combined.Smat)
+
+
+# evaluating comprehension accuracy
+combined.comp_acc = accuracy_comprehension(m = combined.comp, data = data, wordform = "DISC", show_rank = TRUE, neighborhood_density = TRUE)
+
+combined.comp_acc$acc #0.98
+
+combined.comp_measures <- comprehension_measures(comp_acc = combined.comp_acc, Shat = combined.comp$Shat, S = combined.Smat)
+
+# getting the mapping for production
+combined.prod = learn_production(cue_obj = combined.cues, S = combined.Smat, comp = combined.comp)
+
+
+# evaluating production accuracy
+combined.prod_acc = accuracy_production(m = combined.prod, data = data, wordform = "DISC", full_results = TRUE, return_triphone_supports = TRUE)
+
+
+combined.prod_acc$acc #0.99
+```
+
+```{r include=T, eval=T}
+# combined.prod_acc = production accuracy as computed with 'accuracy_production'
+
+ALDCframe <- ALDC(prod_acc = combined.prod_acc, data = data)
+```
+
+```{r echo=FALSE}
+datatable(ALDCframe)
+```
+
+---
+
+## DRC - Dual Route Consistency {#DRC}
+
+The **D**ual **R**oute **C**onsistency describes the correlation between the semantic vector estimated from the direct route and that from the indirect route.
+
+Higher **DRC** values indicates that the semantic vectors produced by the two routes are more similar to each other.
+
+To use this function, you must `learn_comprehension` via `direct` and `indirect` route beforehand. A shortcut to obtain the $\hat{S}$ matrix of the indirect route is given below. Additionally, the data set to compute the production accuracy is needed.
+
+```{r include=F, eval=T}
+## get cues for INDIRECT route
+combined.cues.indirect = make_cue_matrix(data = data, formula = ~ Word + Affix, grams = 3, cueForm = "DISC", indirectRoute = TRUE)
+
+
+# make sure row names are in the correct order
+all(rownames(combined.cues.indirect$matrices$C) == rownames(combined.Smat))
+
+combined.Smat2 <- combined.Smat[rownames(combined.cues.indirect$matrices$C)]
+
+all(rownames(combined.cues.indirect$matrices$C) == rownames(combined.Smat2))
+
+
+## get mapping for comprehension with INDIRECT route cues
+combined.comp.indirect = learn_comprehension(cue_obj = combined.cues.indirect, S = combined.Smat2)
+
+
+## solve the following equations to obtain the indirect route Shat matrix
+Tmat = combined.comp.indirect$matrices$T
+X = MASS::ginv(t(combined.comp.indirect$matrices$C) %*% combined.comp.indirect$matrices$C) %*% t(combined.comp.indirect$matrices$C)
+K = X %*% combined.comp.indirect$matrices$T
+H = MASS::ginv(t(Tmat) %*% Tmat) %*% t(Tmat) %*% combined.Smat #IMPORTANT: this is the direct route Smat!!!
+That = combined.comp.indirect$matrices$C %*% K
+Shat = That %*% H
+```
+
+```{r include=T, eval=T}
+# comprehension = comprehension as obtained by 'learn_comprehension'
+# Shat_matrix_indirect = Shat matrix of the indirect route
+
+DRCframe <- DRC(comprehension = combined.comp, Shat_matrix_indirect = Shat, data = data)
+```
+
+```{r echo=FALSE}
+datatable(DRCframe)
+```
+
+Shortcut to obtain the indirect route Shat matrix:
+
+```{r include=T, eval=F}
+# combined.comp.indirect = cue matrix as obtained by 'make_cue_matrix'
+
+Tmat = combined.comp.indirect$matrices$T
+
+X = MASS::ginv(t(combined.comp.indirect$matrices$C) %*% combined.comp.indirect$matrices$C) %*% t(combined.comp.indirect$matrices$C)
+
+K = X %*% combined.comp.indirect$matrices$T
+
+H = MASS::ginv(t(Tmat) %*% Tmat) %*% t(Tmat) %*% combined.Smat #IMPORTANT: this is the direct route Smat!!!
+
+That = combined.comp.indirect$matrices$C %*% K
+
+Shat = That %*% H
+```
+
+---
+
+## EDNN - Euclidian Distance from Nearest Neighbour {#EDNN}
+
+The **E**uclidian **D**istance from **N**earest **N**eighbour describes the Euclidean distance from the semantic vector $\hat{s}$ produced by the direct route to its closest semantic word neighbour.
+
+Higher **EDNN** values indicate that a word is more distant from the nearest word neighbour.
+
+To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
+
+```{r include=T, eval=T}
+# comprehension = comprehension as obtained by 'learn_comprehension'
+
+EDNNframe <- EDNN(comp_measures = combined.comp_measures, data = data)
+```
+
+```{r echo=FALSE}
+datatable(EDNNframe)
+```
+
+---
+
+## NNC - Nearest Neighbour Correlation {#NNC}
+
+The **N**earest **N**eighbour **C**orrelation describes the maximum of the correlations between a pseudoword's estimated semantic vector and words' semantic vectors.
+
+Higher **NNC** values indicate that a pseudoword's meaning is similar to that of a real word.
+
+To use this function, you must create a real word S matrix as well as a pseudoword S matrix beforehand. Additionally, the data sets to compute both S matrices are needed.
+
+```{r include=T, eval=T}
+# pseudo.Smat = S matrix for pseudowords
+# real.Smat = S matrix for real words
+
+NNCframe <- NNC(pseudo_S_matrix = pseudo.Smat, real_S_matrix = real.Smat, pseudo_word_data = pseudo.data, real_word_data = real.data)
+```
+
+```{r echo=FALSE}
+datatable(NNCframe)
+```
+
+---
+
+## SCPP - Semantic Correlation of Predicted Production {#SCPP}
+
+The **S**emantic **C**orrelation of **P**redicted **P**roduction describes the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms.
+
+Higher **NNC** values indicate that the semantics of the estimated form better approximate the estimated meaning.
+
+To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
+
+```{r include=T, eval=T}
+# comprehension = comprehension as obtained by 'learn_comprehension'
+
+SCPPframe <- SCPP(comp_measures = combined.comp_measures, data = data)
+```
+
+```{r echo=FALSE}
+datatable(SCPPframe)
+```
+
+---
+
+*Please message the author at contact@dominicschmitz.com in case of any questions, errors or ideas.*
