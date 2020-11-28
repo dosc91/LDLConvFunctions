@@ -1,6 +1,6 @@
 # LDLConvFunctions
 
-R package offering functions to conveniently compute and extract several measures from WpmWithLdl objects.
+An R package offering functions to conveniently compute and extract several measures from WpmWithLdl objects.
 
 # How to Install
 
