@@ -24,7 +24,7 @@ library(WpmWithLdl)
 
 This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
 
-All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise.
+All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Measures computed and extracted by functions of this package were originally introduced by Chuang et al. (2020).
 
 ---
 
@@ -334,6 +334,19 @@ SCPPframe <- SCPP(comp_measures = combined.comp_measures, data = data)
 ```{r echo=FALSE}
 datatable(SCPPframe)
 ```
+
+---
+
+# References
+
+**WpmWithLdl package:** </br>
+Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270. [doi.org/10.1075/ml.18010.baa](https://doi.org/10.1075/ml.18010.baa)
+
+**Linear Discriminative Learning:** </br>
+Baayen, R. H., Chuang, Y. Y., Shafaei-Bajestan, E., & Blevins, J. P. (2019). The discriminative lexicon: A unified computational model for the lexicon and lexical processing in comprehension and production grounded not in (de)composition but in linear discriminative learning. Complexity, 2019, 1-39. [doi.org/10.1155/2019/4895891](https://doi.org/10.1155/2019/4895891)
+
+**Study introducing ALC, ALDC, DRC, EDNN, NNC, and SCPP:** </br>
+Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51. [doi.org/10.3758/s13428-020-01356-w](https://doi.org/10.3758/s13428-020-01356-w)
 
 ---
 
