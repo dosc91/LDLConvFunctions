@@ -30,3 +30,7 @@ This is a full list of all functions currently contained in `LDLConvFunctions`:
 - EDNN - Euclidian Distance from Nearest Neighbour
 - NNC - Nearest Neighbour Correlation
 - SCPP - Semantic Correlation of Predicted Production
+
+# References
+
+Please see the references section of the [vignette](http://htmlpreview.github.io/?https://github.com/dosc91/LDLConvFunctions/blob/main/vignettes/introduction.html) for a list of references.
