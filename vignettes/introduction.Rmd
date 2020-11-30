@@ -24,7 +24,7 @@ library(WpmWithLdl)
 
 This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
 
-All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Measures computed and extracted by functions of this package were originally introduced by Chuang et al. (2020).
+All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Measures computed and extracted by functions of this package were originally introduced by [Chuang et al. (2020)](https://doi.org/10.3758/s13428-020-01356-w).
 
 ---
 
@@ -285,7 +285,7 @@ Higher **EDNN** values indicate that a word is more distant from the nearest wor
 To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
 
 ```{r include=T, eval=T}
-# comprehension = comprehension as obtained by 'learn_comprehension'
+# comp_measures = comprehension measures as obtained by 'comprehension_measures'
 
 EDNNframe <- EDNN(comp_measures = combined.comp_measures, data = data)
 ```
@@ -326,7 +326,7 @@ Higher **SCPP** values indicate that the semantics of the estimated form better 
 To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
 
 ```{r include=T, eval=T}
-# comprehension = comprehension as obtained by 'learn_comprehension'
+# comp_measures = comprehension measures as obtained by 'comprehension_measures'
 
 SCPPframe <- SCPP(comp_measures = combined.comp_measures, data = data)
 ```
