@@ -26,11 +26,8 @@ EDNN <- function (comprehension, data) {
   }
   euclidian <- get.knnx(comprehension$S, comprehension$Shat, k=1)
   EDNN <- as.data.frame(euclidian[["nn.dist"]])
+  colnames(EDNN) <- c("EDNN")
   Word = data$Word
   Base = data$Base
   EDNNframe <- as.data.frame(cbind(Word, Base, EDNN))
-  EDNNframe %>%
-    rename(
-      EDNN = V1
-    )
 }
