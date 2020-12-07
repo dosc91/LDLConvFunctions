@@ -12,12 +12,14 @@ The prefered way to install this package is through devtools:
 devtools::install_github("dosc91/LDLConvFunctions", upgrade_dependencies = FALSE)
 ```
 
-The `ALDC` function requires the [`stringdist`](https://cran.r-project.org/web/packages/stringdist/index.html) package to function. Thus, the [`stringdist`](https://cran.r-project.org/web/packages/stringdist/index.html) package is automatically installed unless it is installed already. Similary, the EDNN function requires the [`FNN`](https://cran.r-project.org/web/packages/FNN/index.html) package to function. Thus, this package is automatically installed unless it is installed already.
+The `ALDC` function requires the [`stringdist`](https://cran.r-project.org/web/packages/stringdist/index.html) package to function. Thus, the [`stringdist`](https://cran.r-project.org/web/packages/stringdist/index.html) package is automatically installed unless it is installed already. Similary, the EDNN function requires the [`FNN`](https://cran.r-project.org/web/packages/FNN/index.html) package to function. Thus, this package is automatically installed unless it is installed already. The [`dplyr`](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) package is required as well.
 
-In case this automatic installation does not work for whatever reason, please install it manually:
+In case this automatic installation does not work for whatever reason, please install the required packages manually:
 
 ```r
 install.packages("stringdist")
+install.packages("FNN")
+install.packages("dplyr")
 ```
 
 # Overview
