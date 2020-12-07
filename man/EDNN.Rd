@@ -26,6 +26,8 @@ This measure is similar to \code{l2norm} which is part of the \code{WpmWithLdl::
 \references{
 Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
 
+Beygelzimer, A., Kakadet, S., Langford, J., Arya, S., Mount, D., & Shengqiao, L. (2019). FNN: Fast Nearest Neighbor Search Algorithms and Applications. R package version 1.1.3.
+
 Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
 }
 \author{
