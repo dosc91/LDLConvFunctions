@@ -4,12 +4,12 @@
 \alias{EDNN}
 \title{Euclidian Distance from Nearest Neighbour - EDNN}
 \usage{
-EDNN(comp_measures, data)
+EDNN(comprehension, data)
 }
 \arguments{
-\item{comp_measures}{A data frame, typically the output of \code{WpmWithLdl::comprehension_measures}.}
+\item{comprehension}{A data frame, typically the output of \code{WpmWithLdl::learn_comprehension}.}
 
-\item{data}{The dataset with which \code{comp_measures} was computed}
+\item{data}{The dataset with which \code{comprehension} was computed}
 }
 \value{
 A data frame containing:
@@ -21,7 +21,8 @@ A data frame containing:
 }
 \description{
 \code{EDNN} extracts the Euclidian distance between a word's estimated semantic vector and its nearest neighbour.
-This measure is similar to \code{l2norm} which is part of the \code{WpmWithLdl::comprehension_measures} function.
+
+\code{EDNN} extracts the Euclidian distance between a word's estimated semantic vector and its nearest neighbour.
 }
 \references{
 Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
