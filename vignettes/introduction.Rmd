@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 library(LDLConvFunctions)
 library(DT)
 library(WpmWithLdl)
+library(FNN)
+library(dplyr)
 ```
 
 `LDLConvFunctions` offers functions to conveniently compute and extract several measures from `WpmWithLdl` objects.
@@ -278,16 +280,16 @@ Shat = That %*% H
 
 ## EDNN - Euclidian Distance from Nearest Neighbour {#EDNN}
 
-The **E**uclidian **D**istance from **N**earest **N**eighbour describes the Euclidean distance from the semantic vector $\hat{s}$ produced by the direct route to its closest semantic word neighbour.
+The **E**uclidian **D**istance from **N**earest **N**eighbour describes the Euclidean distance from the semantic vector $\hat{s}$ produced by the direct route to its closest semantic word neighbour. The euclidian distance is measured using the `get.knnx` function of the [`FNN`](https://cran.r-project.org/web/packages/FNN/index.html) package.
 
 Higher **EDNN** values indicate that a word is more distant from the nearest word neighbour.
 
-To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
+To use this function, you must `learn_comprehension`. Additionally, the data set to compute `learn_comprehension` is needed.
 
 ```{r include=T, eval=T}
-# comp_measures = comprehension measures as obtained by 'comprehension_measures'
+# # comprehension = comprehension as obtained by 'learn_comprehension'
 
-EDNNframe <- EDNN(comp_measures = combined.comp_measures, data = data)
+EDNNframe <- EDNN(comprehension = combined.comp, data = data)
 ```
 
 ```{r echo=FALSE}
