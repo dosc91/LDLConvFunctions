@@ -1,9 +1,9 @@
 #' Euclidian Distance from Nearest Neighbour - EDNN
 #'
 #' @description \code{EDNN} extracts the Euclidian distance between a word's estimated semantic vector and its nearest neighbour.
-#' This measure is similar to \code{l2norm} which is part of the \code{WpmWithLdl::comprehension_measures} function.
-#' @param comp_measures A data frame, typically the output of \code{WpmWithLdl::comprehension_measures}.
-#' @param data The dataset with which \code{comp_measures} was computed
+#' @description \code{EDNN} extracts the Euclidian distance between a word's estimated semantic vector and its nearest neighbour.
+#' @param comprehension A data frame, typically the output of \code{WpmWithLdl::learn_comprehension}.
+#' @param data The dataset with which \code{comprehension} was computed
 #' @return A data frame containing:
 #' \itemize{
 #'   \item \code{EDNN} - The EDNN value of a word.
@@ -17,14 +17,14 @@
 
 #' @export
 
-EDNN <- function (comp_measures, data) {
-  if (is.null(comp_measures)) {
-    stop(call=F, geterrmessage = "comp_measures not found\n")
+EDNN <- function (comprehension, data) {
+  if (is.null(comprehension)) {
+    stop(call=F, geterrmessage = "comprehension not found\n")
   }
   if (is.null(data)) {
     stop(call=F, geterrmessage = "data not found\n")
   }
-  euclidian <- get.knnx(comp_measures$S, comp_measures$Shat, k=1)
+  euclidian <- get.knnx(comprehension$S, comprehension$Shat, k=1)
   EDNN <- as.data.frame(euclidian[["nn.dist"]])
   Word = data$Word
   Base = data$Base
