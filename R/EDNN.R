@@ -12,6 +12,7 @@
 #' }
 #' @author D. Schmitz
 #' @references Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
+#' @references Beygelzimer, A., Kakadet, S., Langford, J., Arya, S., Mount, D., & Shengqiao, L. (2019). FNN: Fast Nearest Neighbor Search Algorithms and Applications. R package version 1.1.3.
 #' @references Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51.
 
 #' @export
@@ -23,8 +24,13 @@ EDNN <- function (comp_measures, data) {
   if (is.null(data)) {
     stop(call=F, geterrmessage = "data not found\n")
   }
-  EDNN = comp_measures$l2norm
+  euclidian <- get.knnx(comp_measures$S, comp_measures$Shat, k=1)
+  EDNN <- as.data.frame(euclidian[["nn.dist"]])
   Word = data$Word
   Base = data$Base
   EDNNframe <- as.data.frame(cbind(Word, Base, EDNN))
+  EDNNframe %>%
+    rename(
+      EDNN = V1
+    )
 }
