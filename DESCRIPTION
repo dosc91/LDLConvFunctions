@@ -1,5 +1,5 @@
 Package: LDLConvFunctions
-Title: LDLConvFunctions for measure computation and extraction
+Title: LDLConvFunctions for measure computation, extraction, and other handy stuff.
 Version: 1.0
 Authors@R: 
     person(given = "Dominic",
@@ -7,9 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "contact@Dominic.Schmitz.com",
            comment = c(ORCID = "0000-0003-0636-5249"))
-Description: Compute and extract measures from WpmWithLdl objects.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: Compute and extract measures from WpmWithLdl objects; apply changes to LDL matrices.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
