@@ -22,7 +22,10 @@ library(FNN)
 library(dplyr)
 ```
 
-`LDLConvFunctions` offers functions to conveniently compute and extract several measures from `WpmWithLdl` objects.
+`LDLConvFunctions` offers functions 
+
+- to conveniently compute and extract several measures from `WpmWithLdl` objects
+- to reorder C matrices when handling pseudowords in LDL
 
 This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
 
@@ -32,7 +35,7 @@ All functions explicitly mentioned in this vignette which are not part of the `L
 
 # Installation
 
-The prefered way to install this package is through devtools:
+The preferred way to install this package is through devtools:
 
 ```{r include=T, eval=F}
 devtools::install_github("dosc91/LDLConvFunctions", upgrade_dependencies = FALSE)
@@ -50,7 +53,9 @@ install.packages("stringdist")
 
 # Overview
 
-This is a full list of all functions contained in `LDLConvFunctions`:
+This is a full list of all functions and data contained in `LDLConvFunctions`.
+
+Functions to compute and extract measures:
 
 - ALC - [Average Lexical Correlation](#ALC)
 - ALDC - [Average Levenshtein Distance of Candidates](#ALDC)
@@ -59,17 +64,22 @@ This is a full list of all functions contained in `LDLConvFunctions`:
 - NNC - [Nearest Neighbour Correlation](#NNC)
 - SCPP - [Semantic Correlation of Predicted Production](#SCPP)
 
+Functions to reorder C matrices:
+
+- [find_triphones](#find_triphones)
+- [reorder_pseudo_C_matrix](#reorder_pseudo_C_matrix)
+
 Additionally, the package provides a small sample data set:
 
-- LDLConvFunctions_data.RData
+- [LDLConvFunctions_data.RData](#Data)
 
 This data set will be used to illustrate the use of functions throughout this vignette.
 
 ---
 
-# Data
+# Data {#Data}
 
-The LDLConvFunctions_data.rda file which is part of this package contains a data frame with 100 rows and 4 variables.
+The `LDLConvFunctions_data.rda` file which is part of this package contains a data frame with 100 rows and 4 variables.
 
 ```{r include=T, eval=T}
 # load data
@@ -91,18 +101,6 @@ pseudo.data <- data[89:100,]
 ```
 
 The real word data set contains 88 rows, the pseudoword data set contains 12 rows.
-
----
-
-# Functions
-
-## ALC - Average Lexical Correlation {#ALC}
-
-The **A**verage **L**exical **C**orrelation variable describes the mean correlation of a pseudoword's estimated semantic vector (as contained in $\hat{S}$) with each of the words' semantic vectors (as contained in $S$).
-
-Higher **ALC** values indicate that a pseudoword vector is part of a denser semantic neighbourhood.
-
-To use this function, you must create a real word S matrix as well as a pseudoword S matrix beforehand. Additionally, the data set to create the pseudoword S matrix is needed.
 
 ```{r include=F, eval=T}
 real.cues = make_cue_matrix(data = real.data, formula = ~ Word + Affix, grams = 3, wordform = "DISC")
@@ -154,6 +152,55 @@ pseudo.Smat <- as.matrix(pseudo.Smat)
 
 combined.Smat <- rbind(real.Smat, pseudo.Smat)
 ```
+
+---
+
+# Functions to reorder C matrices
+
+## find_triphones {#find_triphones}
+
+`find_triphones` finds all triphones contained in two C matrices, e.g. in a (smaller) pseudoword and (bigger) real word cue matrix. All triphones contained in **both** matrices as well as their column numbers are returned.
+
+```{r include=T, eval=T}
+# pseudo.cues = C matrix for pseudowords
+# real.cues = C matrix for real words
+
+found_triphones <- find_triphones(pseudo_C_matrix = pseudo.cues, real_C_matrix = real.cues)
+```
+
+```{r echo=FALSE}
+datatable(found_triphones)
+```
+
+---
+
+## reorder_pseudo_C_matrix {#reorder_pseudo_C_matrix}
+
+`reorder_pseudo_C_matrix` uses the information on triphones found by `find_triphones` to create a new version of the (smaller) pseudoword matrix with identical column order as the (bigger) real word matrix.
+
+```{r include=T, eval=T}
+# pseudo.cues = C matrix for pseudowords
+# real.cues = C matrix for real words
+
+reordered_C_matrix <- reorder_pseudo_C_matrix(pseudo_C_matrix = pseudo.cues, real_C_matrix = real.cues, found_triphones = found_triphones)
+```
+
+```{r include=T, eval=T}
+all(rownames(real.cues$matrices$C) == rownames(reordered_C_matrix))
+```
+
+---
+
+
+# Functions to compute and extract measures
+
+## ALC - Average Lexical Correlation {#ALC}
+
+The **A**verage **L**exical **C**orrelation variable describes the mean correlation of a pseudoword's estimated semantic vector (as contained in $\hat{S}$) with each of the words' semantic vectors (as contained in $S$).
+
+Higher **ALC** values indicate that a pseudoword vector is part of a denser semantic neighbourhood.
+
+To use this function, you must create a real word S matrix as well as a pseudoword S matrix beforehand. Additionally, the data set to create the pseudoword S matrix is needed.
 
 ```{r include=T, eval=T}
 # pseudo.Smat = S matrix for pseudowords
