@@ -6,7 +6,7 @@ Check out the [vignette](http://htmlpreview.github.io/?https://github.com/dosc91
 
 # How to Install
 
-The prefered way to install this package is through devtools:
+The preferred way to install this package is through devtools:
 
 ```r
 devtools::install_github("dosc91/LDLConvFunctions", upgrade_dependencies = FALSE)
