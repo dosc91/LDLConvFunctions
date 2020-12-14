@@ -1,6 +1,9 @@
 # LDLConvFunctions
 
-R package offering functions to conveniently compute and extract several measures from WpmWithLdl objects.
+`LDLConvFunctions` offers functions
+
+- to conveniently compute and extract several measures from WpmWithLdl objects
+- to reorder C matrices when handling pseudowords in LDL
 
 Check out the [vignette](http://htmlpreview.github.io/?https://github.com/dosc91/LDLConvFunctions/blob/main/vignettes/introduction.html) for more detailed information.
 
@@ -23,7 +26,9 @@ install.packages("FNN")
 
 # Overview
 
-This is a full list of all functions currently contained in `LDLConvFunctions`:
+This is a full list of all functions currently contained in `LDLConvFunctions`
+
+Functions to compute and extract measures:
 
 - ALC - Average Lexical Correlation
 - ALDC - Average Levenshtein Distance of Candidates
@@ -31,6 +36,15 @@ This is a full list of all functions currently contained in `LDLConvFunctions`:
 - EDNN - Euclidian Distance from Nearest Neighbour
 - NNC - Nearest Neighbour Correlation
 - SCPP - Semantic Correlation of Predicted Production
+
+Functions to reorder C matrices:
+
+- find_triphones
+- reorder_pseudo_C_matrix
+
+Additionally, the package provides a small sample data set:
+
+- LDLConvFunctions_data.RData
 
 # References
 
