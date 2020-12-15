@@ -4,10 +4,10 @@
 \alias{SCPP}
 \title{Semantic Correlation of Predicted Production - SCPP}
 \usage{
-SCPP(comp_measures, data)
+SCPP(prod_measures, data)
 }
 \arguments{
-\item{comp_measures}{A data frame, typically the output of \code{WpmWithLdl::comprehension_measures}.}
+\item{prod_measures}{A data frame, typically the output of \code{WpmWithLdl::production_measures}.}
 
 \item{data}{The dataset with which \code{comp_measures} was computed}
 }
@@ -20,7 +20,7 @@ A data frame containing:
 }
 }
 \description{
-\code{SCPP} extracts the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms. This measure is similar to \code{cor_max} which is part of the \code{WpmWithLdl::comprehension_measures} function.
+\code{SCPP} extracts the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms. This measure is similar to \code{correlations} which is part of the \code{WpmWithLdl::production_measures} function.
 }
 \references{
 Baayen, R. H., Chuang, Y. Y., and Blevins, J. P. (2018). Inflectional morphology with linear mappings. The Mental Lexicon, 13 (2), 232-270.
