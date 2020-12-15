@@ -2,7 +2,7 @@
 #'
 #' @description \code{SCPP} extracts the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms. This measure is similar to \code{correlations} which is part of the \code{WpmWithLdl::production_measures} function.
 #' @param prod_measures A data frame, typically the output of \code{WpmWithLdl::production_measures}.
-#' @param data The dataset with which \code{comp_measures} was computed
+#' @param data The dataset with which \code{prod_measures} was computed.
 #' @return A data frame containing:
 #' \itemize{
 #'   \item \code{SCPP} - The SCPP value of a word.
