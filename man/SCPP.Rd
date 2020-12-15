@@ -9,7 +9,7 @@ SCPP(prod_measures, data)
 \arguments{
 \item{prod_measures}{A data frame, typically the output of \code{WpmWithLdl::production_measures}.}
 
-\item{data}{The dataset with which \code{comp_measures} was computed}
+\item{data}{The dataset with which \code{prod_measures} was computed.}
 }
 \value{
 A data frame containing:
