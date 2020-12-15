@@ -240,9 +240,11 @@ combined.comp_measures <- comprehension_measures(comp_acc = combined.comp_acc, S
 # getting the mapping for production
 combined.prod = learn_production(cue_obj = combined.cues, S = combined.Smat, comp = combined.comp)
 
-
 # evaluating production accuracy
 combined.prod_acc = accuracy_production(m = combined.prod, data = data, wordform = "DISC", full_results = TRUE, return_triphone_supports = TRUE)
+
+# getting prod.measures
+combined.prod_measures = production_measures(prod_acc = combined.prod_acc, S = combined.Smat, prod = combined.prod)
 
 
 combined.prod_acc$acc #0.99
@@ -372,12 +374,12 @@ The **S**emantic **C**orrelation of **P**redicted **P**roduction describes the m
 
 Higher **SCPP** values indicate that the semantics of the estimated form better approximate the estimated meaning.
 
-To use this function, you must `learn_comprehension` and extract comprehension measures beforehand. Additionally, the data set to compute `learn_comprehension` is needed.
+To use this function, you must `learn_production` and extract production measures beforehand. Additionally, the data set to compute `learn_production` is needed.
 
 ```{r include=T, eval=T}
-# comp_measures = comprehension measures as obtained by 'comprehension_measures'
+# prod_measures = production measures as obtained by 'production_measures'
 
-SCPPframe <- SCPP(comp_measures = combined.comp_measures, data = data)
+SCPPframe <- SCPP(prod_measures = combined.prod_measures, data = data)
 ```
 
 ```{r echo=FALSE}
