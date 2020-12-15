@@ -1,7 +1,7 @@
 #' Semantic Correlation of Predicted Production - SCPP
 #'
-#' @description \code{SCPP} extracts the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms. This measure is similar to \code{cor_max} which is part of the \code{WpmWithLdl::comprehension_measures} function.
-#' @param comp_measures A data frame, typically the output of \code{WpmWithLdl::comprehension_measures}.
+#' @description \code{SCPP} extracts the maximum correlation between a word's predicted semantic vector and any of the semantic vectors of its candidate forms. This measure is similar to \code{correlations} which is part of the \code{WpmWithLdl::production_measures} function.
+#' @param prod_measures A data frame, typically the output of \code{WpmWithLdl::production_measures}.
 #' @param data The dataset with which \code{comp_measures} was computed
 #' @return A data frame containing:
 #' \itemize{
@@ -15,14 +15,14 @@
 
 #' @export
 
-SCPP <- function (comp_measures, data) {
+SCPP <- function (prod_measures, data) {
   if (is.null(comp_measures)) {
     stop(call=F, geterrmessage = "comp_measures not found\n")
   }
   if (is.null(data)) {
     stop(call=F, geterrmessage = "data not found\n")
   }
-  SCPP = comp_measures$cor_max
+  SCPP = comp_measures$correlations
   Word = data$Word
   Base = data$Base
   SCPPframe <- as.data.frame(cbind(Word, Base, SCPP))
