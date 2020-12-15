@@ -16,13 +16,13 @@
 #' @export
 
 SCPP <- function (prod_measures, data) {
-  if (is.null(comp_measures)) {
-    stop(call=F, geterrmessage = "comp_measures not found\n")
+  if (is.null(prod_measures)) {
+    stop(call=F, geterrmessage = "prod_measures not found\n")
   }
   if (is.null(data)) {
     stop(call=F, geterrmessage = "data not found\n")
   }
-  SCPP = comp_measures$correlations
+  SCPP = prod_measures$correlations
   Word = data$Word
   Base = data$Base
   SCPPframe <- as.data.frame(cbind(Word, Base, SCPP))
