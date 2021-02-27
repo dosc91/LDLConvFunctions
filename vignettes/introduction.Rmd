@@ -1,5 +1,6 @@
 ---
 title: "LDLConvFunctions"
+date: "Version 1.2 - February 2021"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{LDLConvFunctions}
@@ -29,7 +30,7 @@ library(dplyr)
 
 This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
 
-All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Measures computed and extracted by functions of this package were originally introduced by [Chuang et al. (2020)](https://doi.org/10.3758/s13428-020-01356-w).
+All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Some measures computed and extracted by functions of this package were originally introduced by [Chuang et al. (2020)](https://doi.org/10.3758/s13428-020-01356-w).
 
 ---
 
@@ -61,6 +62,7 @@ Functions to compute and extract measures:
 - ALDC - [Average Levenshtein Distance of Candidates](#ALDC)
 - DRC - [Dual Route Consistency](#DRC)
 - EDNN - [Euclidian Distance from Nearest Neighbour](#EDNN)
+- MWS - [Mean Word Support](#MWS)
 - NNC - [Nearest Neighbour Correlation](#NNC)
 - SCPP - [Semantic Correlation of Predicted Production](#SCPP)
 
@@ -336,13 +338,34 @@ Higher **EDNN** values indicate that a word is more distant from the nearest wor
 To use this function, you must `learn_comprehension`. Additionally, the data set to compute `learn_comprehension` is needed.
 
 ```{r include=T, eval=T}
-# # comprehension = comprehension as obtained by 'learn_comprehension'
+# comprehension = comprehension as obtained by 'learn_comprehension'
 
 EDNNframe <- EDNN(comprehension = combined.comp, data = data)
 ```
 
 ```{r echo=FALSE}
 datatable(EDNNframe)
+```
+
+---
+
+## MWS - Mean Word Support {#MWS}
+
+The Mean Word Support describes the mean support for triphones in the winning production form of a word or pseudoword. It takes the path_sum as computed by the WpmWithLdl package and divides it by the number of triphones, i.e. $MWS = \frac{ \text{path sum}}{\text{number of triphones}}$.
+
+Higher MWS values indicate a higher support of a predicted word form.
+
+To use this function, you must learn_production, get accuracy_production, and get production_measures.
+
+```{r include=T, eval=T}
+# combined.prod_acc = production accuracy as computed with 'accuracy_production'
+# prod_measures = production measures as obtained by 'production_measures'
+
+MWSframe <- MWS(prod_acc = combined.prod_acc, prod_measures = combined.prod_measures)
+```
+
+```{r echo=FALSE}
+datatable(MWSframe)
 ```
 
 ---
