@@ -35,6 +35,7 @@ Functions to compute and extract measures:
 - ALDC - Average Levenshtein Distance of Candidates
 - DRC - Dual Route Consistency
 - EDNN - Euclidian Distance from Nearest Neighbour
+- MWS - Mean Word Support
 - NNC - Nearest Neighbour Correlation
 - SCPP - Semantic Correlation of Predicted Production
 
