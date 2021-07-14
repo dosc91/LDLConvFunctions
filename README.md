@@ -1,4 +1,4 @@
-# LDLConvFunctions
+# LDLConvFunctions <img src='https://dominicschmitz.com/packages/LDLConvFunctions_logo.png' align="right" height="138" />
 
 `LDLConvFunctions` offers functions
 
