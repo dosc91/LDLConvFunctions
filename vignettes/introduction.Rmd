@@ -1,12 +1,21 @@
 ---
 title: "LDLConvFunctions"
-date: "Version 1.2 - February 2021"
+date: "Version 1.2.1 - July 2021"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{LDLConvFunctions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+<style type="text/css">
+
+img{
+  border: none;
+  margin: 5px;
+}
+
+</style>
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -23,6 +32,12 @@ library(FNN)
 library(dplyr)
 ```
 
+<div class="logo">
+
+  <img src="figures/LDLConvFunctions_logo.png" style="float:right">
+
+</div>
+
 `LDLConvFunctions` offers functions 
 
 - to conveniently compute and extract several measures from `WpmWithLdl` objects
@@ -31,6 +46,8 @@ library(dplyr)
 This vignette provides all necessary information on the `LDLConvFunctions` package, including installation instructions and examples for all functions.
 
 All functions explicitly mentioned in this vignette which are not part of the `LDLConvFunctions` package are part of the [`WpmWithLdl`](http://www.sfs.uni-tuebingen.de/~hbaayen/software.html) package unless noted otherwise. Some measures computed and extracted by functions of this package were originally introduced by [Chuang et al. (2020)](https://doi.org/10.3758/s13428-020-01356-w).
+
+This package and its functions were first used in [Schmitz et al. (2021)](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.680889/abstract). The `Mean Word Support` function is inspired by [Stein & Plag (2021)](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.678712/abstract).
 
 ---
 
@@ -48,6 +65,7 @@ In case this automatic installation does not work for whatever reason, please in
 
 ```{r include=T, eval=F}
 install.packages("stringdist")
+install.packages("FNN")
 ```
 
 --- 
@@ -421,6 +439,12 @@ Baayen, R. H., Chuang, Y. Y., Shafaei-Bajestan, E., & Blevins, J. P. (2019). The
 
 **Study introducing ALC, ALDC, DRC, EDNN, NNC, and SCPP:** </br>
 Chuang, Y-Y., Vollmer, M-l., Shafaei-Bajestan, E., Gahl, S., Hendrix, P., & Baayen, R. H. (2020). The processing of pseudoword form and meaning in production and comprehension: A computational modeling approach using Linear Discriminative Learning. Behavior Research Methods, 1-51. [doi.org/10.3758/s13428-020-01356-w](https://doi.org/10.3758/s13428-020-01356-w)
+
+**First study using the LDLConvFunctions package:** </br>
+Schmitz, D., Plag, I., Baer-Henney, D., & Stein, S. D. (2021). Durational differences of word-final /s/ emerge from the lexicon: Modelling morpho-phonetic effects in pseudowords with linear discriminative learning. Frontiers in Psychology. [10.3389/fpsyg.2021.680889](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.680889/abstract)
+
+**Study introducing the Mean Word Support measure:** </br>
+Stein, S.D., & Plag, I. (2021). Morpho-phonetic effects in speech production: Modeling the acoustic duration of English derived words with linear discriminative learning. Frontiers in Psychology. [10.3389/fpsyg.2021.678712](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.678712/abstract)
 
 ---
 
