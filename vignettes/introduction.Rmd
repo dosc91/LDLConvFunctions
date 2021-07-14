@@ -1,6 +1,6 @@
 ---
 title: "LDLConvFunctions"
-date: "Version 1.2.1 - July 2021"
+date: "Version 1.2.0.1 - July 2021"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{LDLConvFunctions}
@@ -373,7 +373,7 @@ The Mean Word Support describes the mean support for triphones in the winning pr
 
 Higher MWS values indicate a higher support of a predicted word form.
 
-To use this function, you must learn_production, get accuracy_production, and get production_measures.
+To use this function, you must `learn_production`, get `accuracy_production`, and get `production_measures`.
 
 ```{r include=T, eval=T}
 # combined.prod_acc = production accuracy as computed with 'accuracy_production'
