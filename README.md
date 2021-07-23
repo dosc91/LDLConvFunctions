@@ -1,5 +1,10 @@
 # LDLConvFunctions <img src='https://dominicschmitz.com/packages/LDLConvFunctions_logo.png' align="right" height="138" />
 
+<!-- badges: start -->
+![](https://img.shields.io/badge/version-1.2.0.1-FFA70B.svg)
+![](https://img.shields.io/github/last-commit/dosc91/LDLConvFunctions)
+<!-- badges: end -->
+
 `LDLConvFunctions` offers functions
 
 - to conveniently compute and extract several measures from WpmWithLdl objects
