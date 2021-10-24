@@ -56,3 +56,7 @@ Additionally, the package provides a small sample data set:
 # References
 
 Please see the references section of the [vignette](http://htmlpreview.github.io/?https://github.com/dosc91/LDLConvFunctions/blob/main/vignettes/introduction.html#references) for a list of references.
+
+Please cite the package as follows:
+
+Schmitz, Dominic. (2021). LDLConvFunctions: Functions for measure computation, extraction, and other handy stuff. R package version 0.1. URL: https://github.com/dosc91/LDLConvFunctions
