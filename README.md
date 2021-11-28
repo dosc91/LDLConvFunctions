@@ -59,4 +59,4 @@ Please see the references section of the [vignette](http://htmlpreview.github.io
 
 Please cite the package as follows:
 
-Schmitz, Dominic. (2021). LDLConvFunctions: Functions for measure computation, extraction, and other handy stuff. R package version 0.1. URL: https://github.com/dosc91/LDLConvFunctions
+Schmitz, Dominic. (2021). LDLConvFunctions: Functions for measure computation, extraction, and other handy stuff. R package version 1.2.0.1. URL: https://github.com/dosc91/LDLConvFunctions
