@@ -1,6 +1,6 @@
 Package: LDLConvFunctions
 Title: LDLConvFunctions for measure computation, extraction, and other handy stuff.
-Version: 1.2.0.1
+Version: 1.2.1
 Authors@R: 
     person(given = "Dominic",
            family = "Schmitz",
