@@ -1,7 +1,7 @@
-# LDLConvFunctions <img src='https://dominicschmitz.com/packages/LDLConvFunctions_logo.png' align="right" height="138" />
+# LDLConvFunctions <img src='https://dominicschmitz.com/wp-content/uploads/2021/11/LDLConvFunctions_logo2.png' align="right" height="138" />
 
 <!-- badges: start -->
-![](https://img.shields.io/badge/version-1.2.0.1-FFA70B.svg)
+![](https://img.shields.io/badge/version-1.2.1-FFA70B.svg)
 ![](https://img.shields.io/github/last-commit/dosc91/LDLConvFunctions)
 <!-- badges: end -->
 
