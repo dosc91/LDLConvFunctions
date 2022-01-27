@@ -19,7 +19,7 @@ MWS <- function (prod_acc, prod_measures)
   MWSframe <- matrix(0, nrow = length(rownames(prod_measures)), ncol = 1)
 
   for (i in 1:length(rownames(prod_measures))) {
-    MWSframe[i] <- prod_measures$path_sum[i] / length(combined.prod_acc[["full"]][[i]][["li"]][[1]])
+    MWSframe[i] <- prod_measures$path_sum[i] / length(prod_acc[["full"]][[i]][["li"]][[1]])
   }
   colnames(MWSframe) <- c("MWS")
   return(MWSframe)
